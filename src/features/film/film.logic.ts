@@ -36,3 +36,13 @@ export const getByTitle = async (title: string): Promise<FilmInput | null> => {
         omdb: filmData || undefined,
     };
 };
+
+export const updateFilm = async (title: string, updateData: Partial<FilmInput>): Promise<FilmInput | null> => {
+    const updatedFilm = await Film.findOneAndUpdate({ title }, updateData, { new: true }).exec();
+    return updatedFilm;
+}
+
+export const deleteFilm = async (title: string): Promise<FilmInput | null> => {
+    const deletedFilm = await Film.findOneAndDelete({ title }).exec();
+    return deletedFilm;
+}
