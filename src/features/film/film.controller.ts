@@ -1,9 +1,8 @@
 import type { Request, Response, NextFunction } from 'express';
 import Film from './film.model.ts';
-import { fetchFilmFromOmdb } from '../../utils/film.omdb.ts';
 import {getShown, create, getByTitle, updateFilm, deleteFilm} from './film.logic.ts';
 
-export const getAll = async (req: Request, res: Response, next: NextFunction) => {
+export const getAllFilmsHandler = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const films = await Film.find();
         res.json(films);
@@ -12,25 +11,25 @@ export const getAll = async (req: Request, res: Response, next: NextFunction) =>
     }
 };
 
-export const getShownHandler = async (req: Request, res: Response, next: NextFunction) => {
+export const getShownFilmsHandler = async (req: Request, res: Response, next: NextFunction) => {
     const films = await getShown();
     res.json(films)
 }
 
-export const createHandler = async (req: Request, res: Response, next: NextFunction) => {
+export const createFilmHandler = async (req: Request, res: Response, next: NextFunction) => {
     const filmData = req.body;
     const newFilm = await create(filmData);
     res.status(201).json(newFilm);
 };
 
-export const getByTitleHandler = async (req: Request, res: Response, next: NextFunction) => {
+export const getFilmByTitleHandler = async (req: Request, res: Response, next: NextFunction) => {
     const { title } = req.params;
     const film = await getByTitle(title);
     if (!film) return res.status(404).json({ message: 'Film not found' });
     res.json(film);
 };
 
-export const updateHandler = async (req: Request, res: Response, next: NextFunction) => {
+export const updateFilmHandler = async (req: Request, res: Response, next: NextFunction) => {
     const { title } = req.params;
     const updateData = req.body;
     const updatedFilm = await updateFilm(title, updateData);
@@ -38,7 +37,7 @@ export const updateHandler = async (req: Request, res: Response, next: NextFunct
     res.json(updatedFilm);
 };
 
-export const deleteHandler = async (req: Request, res: Response, next: NextFunction) => {
+export const deleteFilmHandler = async (req: Request, res: Response, next: NextFunction) => {
     const { title } = req.params;
     const deletedFilm = await deleteFilm(title);
     if (!deletedFilm) return res.status(404).json({ message: 'Film not found' });

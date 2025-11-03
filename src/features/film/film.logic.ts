@@ -1,8 +1,8 @@
-import {FilmInput} from "./film.types.ts";
+import type {FilmInput} from "./film.types.ts";
 import Film from './film.model.ts';
 import { filmFactory } from "./film.factory.ts";
 import {fetchFilmFromOmdb} from "../../utils/film.omdb.ts";
-import {OmdbFilm} from "../../types/omdb.ts";
+import type {OmdbFilm} from "../../types/omdb.ts";
 
 export const getAll = async (): Promise<FilmInput[]> => {
     const films = await Film.find().exec(); // .exec() для правильного типу Promise

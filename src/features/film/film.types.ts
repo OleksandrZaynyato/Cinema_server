@@ -1,4 +1,4 @@
-import {OmdbFilm} from "../../types/omdb.ts";
+import type {OmdbFilm} from "../../types/omdb.ts";
 
 export interface FilmInput {
     title: string;

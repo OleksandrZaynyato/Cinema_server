@@ -1,5 +1,5 @@
-import Film from './film.model.js';
-import { FilmInput } from './film.types.js';
+import Film from './film.model.ts';
+import type { FilmInput } from './film.types.ts';
 
 export function filmFactory(data: FilmInput) {
     return new Film({
