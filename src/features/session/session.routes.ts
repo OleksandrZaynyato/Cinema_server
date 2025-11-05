@@ -6,5 +6,6 @@ const router = Router();
 
 router.post("/", asyncHandler(SessionController.create));
 router.post("/:id/book", asyncHandler(SessionController.bookSeats));
+router.post("/auto-generate", SessionController.autoGenerate);
 
 export default router;
